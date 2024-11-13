@@ -1,0 +1,41 @@
+service: RetoIndra
+frameworkVersion: "3"
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: us-east-1
+  memorySize: 2048
+  environment:
+    PORT: 3000
+    DB_HOST: ${env:DB_HOST}
+    DB_PORT: ${env:DB_PORT}
+    DB_USER: ${env:DB_USER}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+    DB_DATABASE: ${env:DB_DATABASE}
+    SW_URL_API: ${env:SW_URL_API}
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+custom:
+  serverless-offline:
+    httpPort: 3000
+
+functions:
+  getAllCards:
+    handler: dist/serverless.startApp
+    events:
+      - http: "GET /api/cards"
+  createCard:
+    handler: dist/serverless.startApp
+    events:
+      - http: "POST /api/cards"
+  getPlanets:
+    handler: dist/serverless.startApp
+    events:
+      - http: "GET /api/planets"

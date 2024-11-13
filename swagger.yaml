@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: API de Reto Indra
+  version: 1.0.0
+  description: Documentación de la API del reto Indra
+paths:
+  /dev/api/planets:
+    get:
+      summary: Obtener los planetas de Star War
+      description: Retorna la lista de planetas de Star War.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Planet'
+  /dev/api/cards:
+    get:
+      summary: Obtener todas las tarjetas
+      description: Retorna la lista de tarjetas.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Card'
+    post:
+      summary: Crear Tarjeta
+      description: Crea una nueva tarjeta.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                owner:
+                  type: string
+                card_number:
+                  type: string
+                cvv:
+                  type: string
+                expiration_month:
+                  type: integer
+                expiration_year:
+                  type: integer
+      responses:
+        '200':
+          description: Tarjeta registrada correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  error:
+                    type: string
+                  data:
+                    type: string
+  
+definitions:
+  Planet:
+    type: object
+    properties:
+      nombre:
+        type: string
+      periodo_de_rotación:
+        type: string
+      período_orbital:
+        type: string
+      diámetro:
+        type: string
+      clima: 
+        type: string
+      gravedad:
+        type: string
+      terreno:
+        type: string
+      superficie_agua:
+        type: string
+      población: 
+        type: string
+      residentes:
+        type: array
+        items:
+          type: string
+      películas:
+        type: array
+        items:
+          type: string
+      creado:
+        type: string
+      editado:
+        type: string
+      url:
+        type: string
+  Card:
+    type: object
+    properties:
+      owner:
+        type: string
+      card_number:
+        type: string
+      cvv:
+        type: string
+      expiration_month:
+        type: integer
+      expiration_year:
+        type: integer
